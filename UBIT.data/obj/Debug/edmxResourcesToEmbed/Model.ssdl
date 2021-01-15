@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IPTwModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Appointment">
+    <Key>
+      <PropertyRef Name="appointment_id" />
+    </Key>
+    <Property Name="appointment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="appointment_number" Type="int" Nullable="false" />
+    <Property Name="appointment_doctor_id" Type="int" Nullable="false" />
+    <Property Name="appointment_patient_id" Type="int" Nullable="false" />
+    <Property Name="appointment_type" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="appointment_date" Type="datetime" Nullable="false" />
+    <Property Name="appointment_description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Doctor">
+    <Key>
+      <PropertyRef Name="doctor_id" />
+    </Key>
+    <Property Name="doctor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="doctor_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="doctor_specialist" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Gender" Type="bit" />
+    <Property Name="doctor_mobile" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="doctor_email" Type="nvarchar" MaxLength="252" Nullable="false" />
+    <Property Name="doctor_address" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MedicalRecord">
+    <Key>
+      <PropertyRef Name="mrecord_id" />
+    </Key>
+    <Property Name="mrecord_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mrecord_patient_id" Type="int" Nullable="false" />
+    <Property Name="mrecord_patient_problem" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="mrecord_dateofExamintion" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="patient_id" />
+    </Key>
+    <Property Name="patient_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="patient_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Gender" Type="bit" />
+    <Property Name="patient_mobile" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="patient_email" Type="nvarchar" MaxLength="252" Nullable="false" />
+    <Property Name="pateint_address" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Appointment_Doctor">
+    <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+    <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="doctor_id" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="appointment_doctor_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Appointment_Patient">
+    <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+    <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="patient_id" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="appointment_patient_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicalRecord_Patient">
+    <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+    <End Role="MedicalRecord" Type="Self.MedicalRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="patient_id" />
+      </Principal>
+      <Dependent Role="MedicalRecord">
+        <PropertyRef Name="mrecord_patient_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="IPTwModelStoreContainer">
+    <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MedicalRecord" EntityType="Self.MedicalRecord" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Appointment_Doctor" Association="Self.FK_Appointment_Doctor">
+      <End Role="Doctor" EntitySet="Doctor" />
+      <End Role="Appointment" EntitySet="Appointment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Appointment_Patient" Association="Self.FK_Appointment_Patient">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="Appointment" EntitySet="Appointment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicalRecord_Patient" Association="Self.FK_MedicalRecord_Patient">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="MedicalRecord" EntitySet="MedicalRecord" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

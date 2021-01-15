@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="IPTwModelStoreContainer" CdmEntityContainer="IPTwEntitiesNew">
+    <EntitySetMapping Name="Appointments">
+      <EntityTypeMapping TypeName="IPTwModel.Appointment">
+        <MappingFragment StoreEntitySet="Appointment">
+          <ScalarProperty Name="appointment_id" ColumnName="appointment_id" />
+          <ScalarProperty Name="appointment_number" ColumnName="appointment_number" />
+          <ScalarProperty Name="appointment_doctor_id" ColumnName="appointment_doctor_id" />
+          <ScalarProperty Name="appointment_patient_id" ColumnName="appointment_patient_id" />
+          <ScalarProperty Name="appointment_type" ColumnName="appointment_type" />
+          <ScalarProperty Name="appointment_date" ColumnName="appointment_date" />
+          <ScalarProperty Name="appointment_description" ColumnName="appointment_description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Doctors">
+      <EntityTypeMapping TypeName="IPTwModel.Doctor">
+        <MappingFragment StoreEntitySet="Doctor">
+          <ScalarProperty Name="doctor_id" ColumnName="doctor_id" />
+          <ScalarProperty Name="doctor_name" ColumnName="doctor_name" />
+          <ScalarProperty Name="doctor_specialist" ColumnName="doctor_specialist" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="doctor_mobile" ColumnName="doctor_mobile" />
+          <ScalarProperty Name="doctor_email" ColumnName="doctor_email" />
+          <ScalarProperty Name="doctor_address" ColumnName="doctor_address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedicalRecords">
+      <EntityTypeMapping TypeName="IPTwModel.MedicalRecord">
+        <MappingFragment StoreEntitySet="MedicalRecord">
+          <ScalarProperty Name="mrecord_id" ColumnName="mrecord_id" />
+          <ScalarProperty Name="mrecord_patient_id" ColumnName="mrecord_patient_id" />
+          <ScalarProperty Name="mrecord_patient_problem" ColumnName="mrecord_patient_problem" />
+          <ScalarProperty Name="mrecord_dateofExamintion" ColumnName="mrecord_dateofExamintion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Patients">
+      <EntityTypeMapping TypeName="IPTwModel.Patient">
+        <MappingFragment StoreEntitySet="Patient">
+          <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+          <ScalarProperty Name="patient_name" ColumnName="patient_name" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="patient_mobile" ColumnName="patient_mobile" />
+          <ScalarProperty Name="patient_email" ColumnName="patient_email" />
+          <ScalarProperty Name="pateint_address" ColumnName="pateint_address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
